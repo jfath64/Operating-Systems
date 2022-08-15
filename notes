@@ -1,1 +1,14 @@
 xfreerdp /u:student /v:IP_Address /dynamic-resolution +glyph-cache +clipboard
+
+
+
+Windows powershell ssh:
+
+-needs WinRm to be running
+  start-service WinRM
+  
+-needs WsMan 
+get-item WSMAN:\localhost\client\trustedhosts
+set-item -value -concatenate to add hosts
+
+cat .\words.txt | Select-String -pattern '\w*a\w*|\w*z\w*' | measure 
