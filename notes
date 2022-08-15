@@ -1,0 +1,1 @@
+xfreerdp /u:student /v:IP_Address /dynamic-resolution +glyph-cache +clipboard
