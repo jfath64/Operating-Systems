@@ -96,3 +96,37 @@ To mount HKU to filesystem:
  priv esc:
  
  HKey_local_machine\microsoft\windows 
+ 
+ 
+ 
+ 
+ 
+ FILE SYSTEM
+ ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ 
+ 
+ alternate data streams
+ 
+dir /R
+-displays alternate streams
+
+"Elden Ring does not deserve GOTY" > calc.fuk:truth.txt
+-creates alternate stream
+
+notepad calc.fuk:truth.txt
+-opens the text in notepad
+
+In powershell:
+
+get-item .\calc.fuk -stream truth.txt
+
+
+get-childitem $pwd | foreach-object { get-item $.fullname -stream * ; where { $_.stream -ne ':$DATA'}} | get-content
+-gets content of alternate data streams
+
+
+
+
+
+
+
