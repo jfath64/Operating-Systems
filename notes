@@ -130,3 +130,164 @@ get-childitem $pwd | foreach-object { get-item $.fullname -stream * ; where { $_
 
 
 
+
+
+
+
+
+
+LINUX
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+crtl t - open terminal
+
+Create ssh profile:
+
+vim .ssh/config
+
+Host linops
+    HostName 10.50.32.237
+    User student
+    Port 22
+
+ssh keygen
+
+ssh-copy-id linops
+
+ssh linops
+
+
+Alias:
+
+cat .bashrc
+
+vim .bash_aliases
+
+  alias sshops='ssh linops -x terminator&'
+  
+source .bashrc
+
+sshops
+
+
+Host Enumeration:
+
+Where Am I?
+hostname
+uname -a
+
+Who am I?
+whoami
+id
+
+What am I allowed to do?
+sudo -l
+
+What's going on?
+w
+who
+ps -elf
+
+What's that? 
+
+Why is that happening?
+
+How is that happening?
+
+What's in there?
+
+what interfaces and ip addresses are on the box?
+ifconfig
+ip addr/ip a
+netstat
+ss -ntlp
+-n tells number instead of name of protocol
+-may need sudo to display processes associated
+ip route/ip r
+arp
+ip neigh/ip n
+iptables -L
+-may need sudo
+
+
+
+
+FILES:
+
+/bin(usr/bin,/usr/local/bin)
+-binaries
+
+/sbin(/usr/sbin)
+-system binaries
+
+/home
+-default users home directory
+
+/usr
+-universal system reasources, catchall for system-wide files 
+
+/etc
+-everything configurable for the system
+
+/var
+-logs, things that will change with time
+
+/boot
+-GRUB, what system reads to boot
+
+/dev
+-special device files, hardware
+
+/lib
+-library, fucntions necesarry for certain applications 
+
+/mnt
+-dedicated for permenaly attached storage
+
+/media
+-removable media
+
+/opt 
+-for any applications the user intalls
+
+/run
+-runtime and varible data
+
+/tmp
+-temporary files 
+
+/proc
+-processes
+
+
+USERS and GROUPS:
+
+/etc/passwd
+-all users
+
+/etc/group 
+-shows groups on system
+gruopname:password:gid:supplmentary users
+
+file permissions
+user    group     other
+750     student   student
+
+suid
+-runs a command as specified user
+
+guid
+-runs a command as specified group
+
+sticky bit
+-only deleted by person who created file 
+
+
+man -k <word>
+-searches for a keyword 
+
+cat /etc/shells
+-shows shells availible
+
+
+
