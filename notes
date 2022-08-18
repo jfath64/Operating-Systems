@@ -289,5 +289,6 @@ man -k <word>
 cat /etc/shells
 -shows shells availible
 
-
+grep -woFf Inquisition_Targets guardsmen.txt
+-compares two files
 
