@@ -292,3 +292,67 @@ cat /etc/shells
 grep -woFf Inquisition_Targets guardsmen.txt
 -compares two files
 
+
+
+
+
+WINDOWS BOOT PROCESS
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Rootkit
+-injects code through drivers
+
+Bootkit
+-rootkit that mainly focuses on boot process
+
+
+POST
+
+BIOS                                          UEFI
+-uses MBR                                     -uses GPT
+-MBR is first 512 bytes on drive              -secure boot sequence checks core files to repair OS
+
+
+CSRSS 
+-requests items from other entities
+
+LSASS
+-user authentication
+
+services.exe 
+-service control manager
+
+
+
+session 0
+-non interactive
+-system runs under
+
+
+0-1000 PID
+system level
+
+< 1000
+user and smss, csrss, winlogon
+
+
+
+
+Type C:\Windows\Panter\Setup.log | findstr /i "Detected boot enviroment"
+
+bcdedit | findstr /i winload
+-if .exe BIOS
+bcdedit | findstr /i winresume
+-cold start or warm
+
+bcdedit /deletevalue safeboot
+bcdedit /deletevalue safebootalternateshell
+-returns system to normal
+
+secure attention sequence 
+-crtl alt delete
+
+
+
+
+
