@@ -354,5 +354,157 @@ secure attention sequence
 
 
 
+LINUX FILE SYSTEM
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+SYSV
+
+BIOS 
+MBR
+GRUB
+Kernel
+INIT
+Runlevels
+
+
+dmidecode -t bios
+-shows os and boot information
+
+lsblk
+-shows disks and where they are mounted
+
+df -h
+-more information for disks
+
+sudo xxd -l 512 -g 1 /dev/sda
+-shows disk grouped in 512 bytes one byte at a time
+
+hex eb means jump in assembly
+
+hex 90 is noop
+
+majic number is almost always 55aa
+
+sudo parted -l 
+-shows disk info
+msdos = BIOS
+gpt = uefi
+
+sudo dd if=/dev/sda of=MBRcopy bs=1 count=512
+
+xxd 
+-opens a file
+
+
+GRUB - Grand Unified Bootloader
+
+boot/grub/grub.cfg
+-Grub config file
+
+linux	/boot/vmlinuz-4.15.0-76-generic root=LABEL=cloudimg-rootfs ro  console=tty1 console=ttyS0
+-line that loads the kernel
+
+KERNEL
+
+linux kernel is monolithic 
+
+linux kernel uses modules which help kernel interact with hardware
+
+lsmod
+-lists kernel modules
+process num 0
+
+makes daemon kthreadd with proc id 2
+
+INIT
+
+ls -l /sbin/init
+-if there is a symlink to systemd then on system d
+
+ps -p 1 
+-shows system type
+
+init is the service and process manager
+
+sysv init very simple cant do much, uses runlevels
+sysd init can do more and uses targets
+
+
+ls /etc/rc3.d
+
+/etc/init.d
+-s and k scripts
+
+/etc/inittab
+-init config table( only on sysV)
+
+Minas_Tirith is sysV
+
+
+RUNLEVELS
+
+0 - halt 
+1 - single user mode
+2 - multiuser, no network
+3 - full multiuser, network
+4 - not  used
+5 - GUI
+6 - reboot
+
+ls -l /etc/rc<1-6>.d 
+-shows different service in different runlevels 
+
+SYSTEMD
+-service, process, boot, home directory, login, etc. manager
+
+Targets 
+ls -lisa /lib/systemd/system/defaul.target
+-check defaul target
+
+/etc/systemd/system
+-user created services
+
+/lib/systemd/systtem, /usr/lib/systemd/system
+-services created by package maintaners
+
+cat /lib/systemd/system/defaul.target
+-gives more information on dafault target
+
+systemctl list-depencencies grahpical.target
+-shows all dependencies .target = needs
+
+
+systemctl show -p Wandts <target>
+-shows wants of the target
+
+systemctl list-units-files
+
+systemctl cat graphical.target
+
+/etc/profile 
+-system wide user conf 
+-persistance 
+
+/etc/enviroment
+-global varibles
+-any update requires restart 
+
+/etc/bash.bashrc
+-interactve non-login shell
+
+/etc/profile.d 
+-runs scipts for any user
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
