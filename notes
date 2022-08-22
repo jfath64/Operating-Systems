@@ -513,7 +513,7 @@ get-ciminstance w32_process
 
 get-ciminstance w32_process | select* | select processid, parentprocessid, name , commandline | outfile $home\desktop\process.txt -width 1024
 
-get-ciminstance w32_process | select* | select processid, parentprocessid, name , commandline | where {$_.name -like "*powershell*"}
+get-ciminstance win32_process | select processid, parentprocessid, name , commandline | where {$_.processid -like "*60*"}
  -finds instances of powershell
  -can use process id as well
  
@@ -544,7 +544,7 @@ netstat -anob
 get-tcpconnection
 
 SYSINTERNALS 
-process explorer
+handle
 
 procmon64.exe
 -monitor boot process1
@@ -573,7 +573,7 @@ USER ACCOUNT CONTROL
 
 \Window\Currentversion\policies\system
 -registry key
-EnableLUA
+-EnableLUA means enabled
 
 
 
