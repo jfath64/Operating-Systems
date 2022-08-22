@@ -496,7 +496,26 @@ systemctl cat graphical.target
 
 
 
+LINUX USEFUL COMMANDS
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+suid
+-runs a command as specified user
 
+guid
+-runs a command as specified group
+
+sticky bit
+-only deleted by person who created file 
+
+
+man -k <word>
+-searches for a keyword 
+
+cat /etc/shells
+-shows shells availible
+
+grep -woFf Inquisition_Targets guardsmen.txt
+-compares two files
 
 
 
