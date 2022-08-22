@@ -495,6 +495,87 @@ systemctl cat graphical.target
 -runs scipts for any user
 
 
+WINDOWS PROCESSES AND SERVICES
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+processes require interaction to start
+services run in the backgroud and require no interaction
+a dll is a library that contains pointers to reasources to other programs
+
+
+
+
+
+COMMANDS 
+
+get-ciminstance w32_process 
+-shows hidden processes
+
+get-ciminstance w32_process | select* | select processid, parentprocessid, name , commandline | outfile $home\desktop\process.txt -width 1024
+
+get-ciminstance w32_process | select* | select processid, parentprocessid, name , commandline | where {$_.name -like "*powershell*"}
+ -finds instances of powershell
+ -can use process id as well
+ 
+
+get-cimclass -classname
+
+get-ciminstance win32_process | where -Property Name -like *LSASS* | Select *
+shows lssas.exe and its handles 
+check to see if pname matches name
+if doesnt match use internet to check hash using virustotal.com
+
+
+get-process -name lsass | select -expandproperty modules | out-file <file> -width 4096
+-shows the handles lsass is using and applies to a file showing all
+
+tasklist /m /fi "IMAGENAME eq lsass.exe"
+-another way using tasklist to show handles
+
+sc.exe
+-service control manager 
+-can show sid of service with showsid
+-will generate a fake sid if name incorrect
+-queryx type=service state=inavtive gives all inactive services 
+
+netstat -anob 
+-shows processid with connection
+
+get-tcpconnection
+
+SYSINTERNALS 
+process explorer
+
+procmon64.exe
+-monitor boot process1
+
+autoruns64.exe
+-reads registries and finds anything that starts automatically
+
+procexp64.exe
+-interactive view of processes
+
+tcpview64.exe
+-interactive dynamic network listing
+
+WINDOWS SCHEDULED TASKS
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+can use gui task scheduler
+some tasks can be in task root directory and you do not have to specify file path
+
+COMMANDS
+
+schtasks /query /tn "\Microsoft\Xb1GameSave\XnlGameSavetask" /v /fo list
+-shows task specified, filepath and status
+
+USER ACCOUNT CONTROL
+
+\Window\Currentversion\policies\system
+-registry key
+EnableLUA
+
+
 
 LINUX USEFUL COMMANDS
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -513,6 +594,8 @@ man -k <word>
 
 cat /etc/shells
 -shows shells availible
+As a part of ensuring that they've created a secure environment Windows administrators often need to know what kind of accesses specific users or groups have to resources including files, directories, Registry keys, global objects and Windows services. AccessChk quickly answers these questions with an intuitive interface and output.
+
 
 grep -woFf Inquisition_Targets guardsmen.txt
 -compares two files
