@@ -560,6 +560,124 @@ systemctl cat graphical.target
 /etc/profile.d 
 -runs scipts for any user
 
+LINUX PROCESSES
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+What's going on?
+
+What's that? 
+
+Why is that happening?
+
+How is that happening?
+
+ps -elf
+-snapshot
+-N -ppid2 is nothing with parent pid of 2
+--forest makes a branching table from processes
+
+ps -Nlf --ppid 2 --forest | grep 8 ps
+-looks for any process with ps 8 and 8 lines arount it
+
+top
+-active list
+-press f key opens menu to add new fields 
+-shift v give hieraricle view
+
+htop
+-better looking display
+-not usually on a ll systems
+-f5 changes to tree view
+-f2 changes fields and display options 
+
+
+/sbin/init 
+-userspace processes
+
+kernel space process share memory with the system so they are critical to stay running
+
+PROCESS OWNERSHIP
+
+real and effective userid
+
+real is your actual user id for your account
+
+effective is what you can do 
+
+the parent and child cron process are owned by root and the rest are managed by user
+
+systemd or init adopt the orphaned processes
+
+every daemon is an orphan process 
+
+zombie process are completed processes that are still taking up process table slots and cannot be killed until the parent is
+
+SYSV uses service command 
+Systemd uses systemctl
+
+
+CRONJOBS
+
+/var/spool/cron
+
+/etc/cron.d
+
+/etc/crontab
+
+-locations for system cronjobs
+
+
+/var/spool/cron/crontabs/student
+-student's crontabs
+
+crontab 
+-e edits 
+-l lists jobs
+-l -u <user> list other user jobs
+-e -u <user> edit other user jobs
+-r removes
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+COMMANDS
+
+kill -l
+-shows all signals kill can send
+
+fg or bg 
+-push of pull process from background to foreground
+
+kill %<num> 
+-terminate by job number
+
+ps --ppid 1 -lf
+-gives all processes with a parent process of 1
+-finds all orpahned processes
+
+disown -a && exit
+-diswons all your process and exits the shell
+
+
+lsof 
+-list all open files for processes on the system
+-p is pid
+
+systemctl list-units --all --type serivce
+-list all services 
+
+
 LINUX USEFUL COMMANDS
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 suid
@@ -583,6 +701,8 @@ As a part of ensuring that they've created a secure environment Windows administ
 grep -woFf Inquisition_Targets guardsmen.txt
 -compares two files
 
+
+sudo lsof -c cron
 
 
 
