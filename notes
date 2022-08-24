@@ -264,6 +264,157 @@ USER ACCOUNT CONTROL
 -registry key
 -EnableLUA means enabled
 
+
+WINDOWS ARTIFACTS, AUDITING, LOGGING
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+ARTIFACTS
+
+-aritfacts are anything left behind by code execution
+
+-.lmk files are hotspots for persistance
+
+BAM
+
+HKLM:\SYSTEM\CureentControlSet\services\bam\usersettings
+                                            \state after bam in later version
+-shows full filepath of any executable ran and user associated 
+-any entry with C:\ was manually created
+-volume1 = C:
+
+gci 'C:\$RECYCLE.BIN' -Recurse -Force
+-show other users recycle bin
+
+$R -contains information inside that was deleted
+$I -contains location of the file
+
+PREFETCH
+
+-Prefetch files are created by the windows operating system when an application is run from a specific location for the first time
+
+-not enabled on servers 
+
+-located in C:\windows\prefetch
+
+-.db is superfetch
+
+-preftech keeps a copy of the entire binary 
+
+AUDITING
+
+C:\Windows\System32\Winevt
+
+eventvwr
+
+Application
+
+Security
+
+System
+
+Customlog
+
+
+get-eventlog -logname *
+-gets normal windows logs
+-to see inside use -message
+
+get-eventlog -logname security -message "*remote" | ft -wrap
+-get any instance of remote in logs
+
+get-winevent
+
+POWERSHELL LOGGING
+
+-enabled by default
+
+-disabled in marine corps
+
+
+COMMANDS 
+
+get-wmiobject win32_useraccount | select name,sid 
+
+get-localuser | select name,sid
+
+wmic useraccount get name,sid (CMD.EXE)
+-get sid 
+
+Get-ItemProperty 'REGISTRY::HKEY_USERS\*\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\UserAssist\{CEBFF5CD-ACE2-4F4F-9178-9926F41749EA}\Count'
+-view executable files run
+
+Get-ItemProperty 'REGISTRY::HKEY_USERS\*\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\UserAssist\{F4E57C4B-2036-45F0-A9AB-443BCFE33D9F}\Count'
+-view shortcut files executed 
+
+'registry::hkey_users\*\software\Microsoft\Windows\CurrentVersion\Explorer\UserAssist\{CEBFF5CD-ACE2-4F4F-9178-9926F41749EA}\count'
+-encoded in ROT13
+
+get-item 'HKLM:\SYSTEM\CureentControlSet\services\bam\usersettings\*'
+
+gci 'C:\$RECYCLE.BIN' -Recurse -Verbose -Force | select *
+-view contents of recycle bin
+
+gci 'C:\$RECYCLE.BIN' -Recurse -Force | foreach-object { if (($_.extension) -like ".txt") {if ($_.name -like "`$R*") { Write-host $_.Name -nonewline ;
+Write_host " --> " -foregroundcolor green -nonewline ; get-content $_.fullname } } } $RPPZWZW.txt --> This has some text in it
+-reads contents of recycling bin
+
+gci -Path 'C:\Windows\Prefetch' -ErrorAction Continue | select * | select -first 5
+-shows when applications are run from certain lcation for the first time
+
+gci -Recurse C:\Users\*\AppData\Roaming\Microsoft\Windows\Recent -ErrorAction Continue | select FullName, LastAccessTime, creationtime
+-shows jump lists
+
+gc 'C:\users\andy.dwyer\appdata\roaming\microsoft\windows\recent\handles.lnk'
+
+gci 'REGISTRY::HKEY_USERS\*\Software\Microsoft\Windows\CurrentVersion\Explorer\Recentdocs'
+-list files in recent docs
+
+[System.Text.Encoding]::Unicode.GetString((gp "REGISTRY::HKEY_USERS\*\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\recentdocs\.txt")."0")
+-hex to unicode
+
+Get-Item "REGISTRY::HKEY_USERS\*\Software\Microsoft\Windows\CurrentVersion\Explorer\RecentDocs\.txt"
+| select -Expand property | ForEach-Object { [System.Text.Encoding]::Default.GetString((Get-ItemProperty -Path "REGISTRY::HKEY_USERS\*\Software\Microsoft\Windows\CurrentVersion\Explorer\RecentDocs\.txt" -Name $_).$_)}
+-convert all user values hex to uni
+
+
+Audit
+
+auditpol /get /category:*
+-query everything
+
+-set File SYstem subcategory to audit
+
+auditpol /set /subcategory:"File System"
+
+-Remove File System subcategory auditing
+
+auditpol /set /subcategory:"File System" /success:disable
+
+-To list the global object access auditing entries set on files or folders:
+
+auditpol /resourceSACL /type:File /view
+
+-To list the global object access auditing entries set on Registry Keys
+
+auditpol /resourceSACL /type:Key /view
+
+-show all logs
+
+wevtutil el
+
+-get log info
+
+wevtutil gli security
+
+-get last 3 events
+
+wevtutil qe security /c:3 /f:text
+
+Log Manipulation
+
+get-eventlog -logname security -message "*remote" | ft -wrap
+-get any instance of remote in logs
+
 LINUX
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
