@@ -829,6 +829,112 @@ systemctl list-units --all --type serivce
 -list all services 
 
 
+
+LIUNX LOGGING
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Authentication
+
+/var/log/auth.log - Authentication related events
+
+/var/run/utmp - Users currently logged in
+
+/var/log/wtmp - History file for utmp
+
+/var/log/btmp - Failed login attempts
+
+last -f <log file>
+-read logs
+
+-from creation of pam to ssh disconnect is your session
+
+
+Application
+
+apache - Web Server (dir)
+
+apt - Package Manager (dir)
+
+/var/log/mysql.log
+
+-history of installations and web server
+
+System 
+
+/var/log/mysql.log
+
+/var/log/syslog - Ubuntu/Debian Catch all
+
+dmesg = Device Messenger (queires /proc/kmsg)
+
+-first logs gernerated on boot
+
+-never fill due to kernal ring buffer
+
+-catchall logs
+
+General Info
+
+Location : /var/log
+
+Config File : /etc/rsyslog.conf
+
+Service : /usr/sbin/rsyslogd
+
+
+RSYSLOGD
+
+/usr/sbin/rsyslogd
+
+reads /dev/log and stores them based on /etc/rsyslog.conf
+
+RSYSLOG.CONF
+
+follow syslog standard facility.severity
+
+facility = what program, or part of system, log is from
+
+severity = urgency
+
+facility:
+0   kernel messages
+1   user-level messages
+2   mail system
+3   system daemons
+4   security/authorization messages
+5   messages generated internally by syslogd
+6   line printer subsystem
+7   network news subsystem
+
+severity
+0  emerg, panic:  Emergency: system is unusable
+1  alert:         Action must be taken immediately
+2  crit:          Critical conditions
+3  err, error:    Error conditions
+4  warn, warning: Warning conditions
+5  notice:        Normal but significant condition
+6  info:          Informational messages
+7  Debug:         Debug-level messages
+8  UUCP subsystem
+9  clock daemon
+10 security/authorization messages
+11 FTP daemon
+12 NTP subsystem13|log audit
+
+-.no = exclude
+-p 514 = syslog
+-@@ = tcp
+-*.info = info and above
+-!.info = everything not and below
+-*.=info = just info
+
+
+
+
+
+
+
+
 LINUX USEFUL COMMANDS
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 suid
