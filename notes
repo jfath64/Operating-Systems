@@ -973,10 +973,74 @@ Why do this as opposed to deleting/recreating files?
 
 last -f /var/log{wtmp,btmp} - Needed to view data files
 
+MEMORY
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Memory analysis is determinig what was going on in RAM
+
+
+ORDER OF VOLITILITY
+
+CPU registers, cache
+
+Routing table, ARP cache, process table, kernel stats, memory
+
+Temporary file systems
+
+Disk
+-stays until disk is destroyed
+
+Remote logging and monitoring data
+-stored somewhere else so usually wont change
+
+Physical configuration, network topology
+
+Archival media - backups
+-only change when updated
+
+
+VOLATILITY
+-progam that works on win, lin, mac
+-forensics
+-h shows all options
+-f add filename
+--profile=<prof>
+imageinfo gets info in the image including profile
+; lets you use mulitple plugins
+pstree shows parent processes
+pslist lists processes
+psscan give physical memory address of proc
+ddllist shows what dlls an executable is using
+dlldump allows you to take dlls
+procdump dumps a process to a file
+memdump get what the process was doing at the time
+connections prints a list of open connections
+conscan shows all active and recently closed tcp connections
+hivedump dumps registy hives 
+hivelist list reistries 
+dumpregistry dumps the whole registry
+-only works with string commannd (slect-string, find-string)
+
+
+.\volatility_2.6_win64_standalone -f ".\cridex.vmem" imageinfo
+-gets profile of machine and other info
+
+.\volatility_2.6_win64_standalone -f ".\cridex.vmem" --profile=WinXPSP2 pslist
+-gets processes run
+
+z:\strings.exe -accepteula "1640.dmp" > 1640.txt
+-use sysinternals to print ledgable strings to a file 
 
 
 
 
+-Each operating system has its own memory acquisition tool called Persistent Memory (pmem)
+
+Linpmem
+
+Winpmem
+
+OSXpmem
 
 
 
