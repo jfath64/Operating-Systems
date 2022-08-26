@@ -1088,7 +1088,35 @@ xpath -q -e '//@addr' output.xml
 
 
 
+addr="xx.xxx.xx.xx"
+ addr="xx.xxx.xx.xx"
+ addr="xx.xxx.xx.xx"
+ addr="xx.xxx.xx.xx"
+ portid="xx"
+ addr="10.50.29.6"
+ addr="xx.xxx.xx.xx"
+ portid="22"
+--TRIMMED--
 
+xpath -q -e '//@addr|//@portid'  output.xml | md5sum
+
+
+
+addr="XXX.xxx.xxx.xxx"
+ addr="XXX.xxx.xxx.xxx"
+ addr="XXX.xxx.xxx.xxx"
+ addr="XXX.xxx.xxx.xxx"
+ addr="XXX.xxx.xxx.xxx"
+ addr="XXX.xxx.xxx.xxx"
+--TRIMMED--
+Flag format: md5 hash of output
+
+xpath -q -e '//@addr'  output.xml  |md5sum
+
+
+xpath -q -e '//@portid/ancestor::host/address/@addr | //@portid' output.xml 2>/dev/null | md5sum
+
+# @portid = /nmaprun/host/ports/port/@portid   ||  @addr = /nmaprun/host/address/@addr
 
 
 
