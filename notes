@@ -905,8 +905,13 @@ facility:
 5   messages generated internally by syslogd
 6   line printer subsystem
 7   network news subsystem
-
+8  UUCP subsystem
+9  clock daemon
+10 security/authorization messages
+11 FTP daemon
+12 NTP subsystem13|log audit
 severity
+
 0  emerg, panic:  Emergency: system is unusable
 1  alert:         Action must be taken immediately
 2  crit:          Critical conditions
@@ -915,11 +920,7 @@ severity
 5  notice:        Normal but significant condition
 6  info:          Informational messages
 7  Debug:         Debug-level messages
-8  UUCP subsystem
-9  clock daemon
-10 security/authorization messages
-11 FTP daemon
-12 NTP subsystem13|log audit
+
 
 -.no = exclude
 -p 514 = syslog
@@ -927,6 +928,56 @@ severity
 -*.info = info and above
 -!.info = everything not and below
 -*.=info = just info
+
+
+LOG MANAGMENT
+
+/etc/logrotate.conf
+-How large to let files get. How long to keep them
+
+Best Practices
+
+Meaningful Naming Schema
+
+Separate logs logically and by precedence
+
+Sync time across network
+
+Control log access
+
+.1 = 1 week ago
+
+USEFUL LOG COMMANDS
+
+journalctl -e
+-shows recent logs
+
+journalctl --list-boots
+-recent boots and can find a boot ids
+
+journalctl -b <bootid> 
+-looks up logs for specific boot
+
+journalctl -u ssh.service
+-logs pertaining to service
+
+tail -f - Continuously show end of file
+
+less /var/log/syslog - View Log in page viewer
+
+logger - Send a user generated message to system Log i.e. Starting Update
+
+> /var/log/messages - Wipes Logs
+
+Why do this as opposed to deleting/recreating files?
+
+last -f /var/log{wtmp,btmp} - Needed to view data files
+
+
+
+
+
+
 
 
 
@@ -962,7 +1013,14 @@ grep -woFf Inquisition_Targets guardsmen.txt
 sudo lsof -c cron
 
 
+jq '."resp_ip_bytes" > 40' conn.log | grep true | wc -l
+-finds any index from a conn.log file that sent more that 40 bytes
 
+jq '."id.orig_h"' conn.log | sort -u | wc -l 
+
+
+xpath -q -e '//@addr' output.xml
+-gives only ip address field from an xml doc
 
 
 
