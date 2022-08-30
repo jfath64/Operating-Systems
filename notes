@@ -415,6 +415,47 @@ Log Manipulation
 get-eventlog -logname security -message "*remote" | ft -wrap
 -get any instance of remote in logs
 
+
+
+
+DOMAIN CONTROLLER
+
+get-forest
+
+get-addomain
+
+get-smbshare
+
+get-command -module activedirectory
+
+Get-ADGroup -filter * | select name, groupcategory, groupscope
+-shows specified colums in groups
+
+Get-ADGroupMember -identity "Domain Admins" -recursvie
+-shows evey member
+
+Get-GPResultantSetOfPolicy
+
+Demo
+
+gpresult 
+-gets policy object queries
+
+Get-ADUser
+
+New-ADUser -Name "Bad Guy" -PasswordNotRequired 1 -Path "OU=3RD LPT,OU=CCO,OU=3RDBN,OU=WARRIORS,DC=ARMY,DC=WARRIORS"                                         
+
+
+search-adaccount -AccountDisabled | select name
+
+earch-ADAccount -AccountExpired | select name
+
+Get-ADuser -Filter * -Properties * | where {$_.<property> -Like "*<pattern_to_match*"} | select-name, <name>
+search users for keywords
+
+
+
+
 LINUX
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
