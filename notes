@@ -454,6 +454,87 @@ Get-ADuser -Filter * -Properties * | where {$_.<property> -Like "*<pattern_to_ma
 search users for keywords
 
 
+WINDOWS TEST REVIEW
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+FOLLOW LINUX HOST ENUMERATION
+mechanism = what caused something to happen 
+do not cat binaies
+do not get strings of binaries
+do not look inside handles and dlls
+do not look at drivers
+can look in scipts and txt
+
+
+Get sysinternals script
+
+-look out for ports with repeated numbers and strange patterns
+
+net use * \\live.sysinternals.com\tools
+
+NETWORK
+
+netstat -anob
+
+get-nettcpconnection
+
+PROCESS
+
+get-process
+
+get-process <proc> | select name,id,path
+-gives full path of file running
+
+autoruns
+
+taskmanager
+
+ARTIFACTS
+
+recylcing bin
+$R content
+$I pointer
+
+bam 
+
+usersassist
+-encoded in ROT 13
+Get-ItemProperty 'REGISTRY::HKEY_USERS\*\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\UserAssist\{CEBFF5CD-ACE2-4F4F-9178-9926F41749EA}\Count'
+
+prefetch
+get-childitem -path c:\windows\prefetch
+
+
+Registries
+
+get-item
+
+HKLM
+
+HKCU
+
+HKU
+
+autoruns
+
+schtasks
+ taskscheduler -only to library and stop at microsoft
+ 
+ autoruns
+
+Profiles
+
+test -path $profile.allusersallhosts
+GET SCRIPT
+
+
+
+
+
+
+
+
+
+
 
 
 LINUX
