@@ -1161,3 +1161,89 @@ xpath -q -e '//@portid/ancestor::host/address/@addr | //@portid' output.xml 2>/d
 
 
 
+LINUX TEST REVIEW
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+4 LINUX QUESTIONS
+
+Work through using this process and it will be easy
+
+Remember to ask for help
+
+HOST ENUMERATION
+
+Where Am I?
+hostname
+uname -a
+
+Who am I?
+whoami
+id
+
+What am I allowed to do?
+sudo -l
+
+What's going on?
+w
+who
+ps -elf
+
+What's that? 
+
+Why is that happening?
+
+How is that happening?
+
+What's in there?
+
+what interfaces and ip addresses are on the box?
+What net traffic?
+ifconfig
+ip addr/ip a
+netstat
+ss -ntlp
+htop
+-n tells number instead of name of protocol
+-may need sudo to display processes associated
+ip route/ip r
+arp
+ip neigh/ip n
+iptables -L
+-may need sudo
+
+PROCCESS VALIDITY
+ ps -elf 
+ lsof
+ /etc/systemd/system
+ /lib/systemd/system
+ 
+ If Cron proces
+ -user who owns file runs process
+ crontab -l -u <user>
+ -may need sudo
+ -use sudo -l to determine if attempt will be logged
+ /var/spool/cron/crontabs
+ -user crontabs
+ /etc/crontabs,/etc/cron.d,/var/spool/cron/crontabs/root
+ -root crontabs
+  
+  PERSISTANCE
+  /etc/grub
+  /tmp
+  /init
+  /etc/bash.bashrc
+  -systemwide profile for interactive non-login shells
+  /etc/profile
+  -system wide configuration file 
+  -when you log in
+  -executes scripts in /etc/profile.d
+  
+
+
+  
+
+
+
+
+
+
